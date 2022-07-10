@@ -18,8 +18,9 @@
 
 int main() {
 	const size_t length = 8;
-	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+	// std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
 	// std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
 
 	// bubble_sort<int>(a.data(), length, &compare);
 	// bubble_bug_sort<int>(a.data(), length, &compare);

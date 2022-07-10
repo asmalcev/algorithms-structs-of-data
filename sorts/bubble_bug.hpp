@@ -11,7 +11,7 @@ T* bubble_bug_sort(T* array, size_t length, bool (*compare)(T, T)) {
 	size_t replace_stat = 0;
 	#endif
 
-	int di;
+	short di;
 	bool wasReplace;
 
 	for (size_t j = 0; j < length - 1; j++) {
@@ -25,9 +25,7 @@ T* bubble_bug_sort(T* array, size_t length, bool (*compare)(T, T)) {
 
 			if (di > 0) {
 				if (compare(array[i], array[i + 1])) {
-					T tmp = array[i];
-					array[i] = array[i + 1];
-					array[i + 1] = tmp;
+					std::swap(array[i], array[i + 1]);
 
 					wasReplace = true;
 
@@ -41,9 +39,7 @@ T* bubble_bug_sort(T* array, size_t length, bool (*compare)(T, T)) {
 				}
 			} else {
 				if (compare(array[i], array[i + 1])) {
-					T tmp = array[i];
-					array[i] = array[i + 1];
-					array[i + 1] = tmp;
+					std::swap(array[i], array[i + 1]);
 
 					wasReplace = true;
 
@@ -59,14 +55,6 @@ T* bubble_bug_sort(T* array, size_t length, bool (*compare)(T, T)) {
 					di = 1;
 				}
 			}
-
-			// std::cout
-			// 	<< "Iter: " << j << " Elements compare: " << array[i] << " " << array[i + 1]
-			// 	<< " i: " << i << " di: " << di << std::endl;
-			// for (size_t i = 0; i < length; i++) {
-			// 	std::cout << array[i] << " ";
-			// }
-			// std::cout << std::endl << std::endl;
 		}
 
 		if (!wasReplace) {

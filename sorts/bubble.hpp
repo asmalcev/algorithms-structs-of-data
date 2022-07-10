@@ -23,9 +23,7 @@ T* bubble_sort(T* array, size_t length, bool (*compare)(T, T)) {
 			#endif
 
 			if (compare(array[j], array[j + 1])) {
-				T tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
+				std::swap(array[j], array[j + 1]);
 
 				wasReplace = true;
 

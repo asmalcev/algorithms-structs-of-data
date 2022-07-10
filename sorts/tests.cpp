@@ -13,6 +13,7 @@
 */
 #include "bubble.hpp"
 #include "bubble_bug.hpp"
+#include "bubble_comb.hpp"
 
 
 template <typename T>
@@ -39,27 +40,33 @@ void bug_test_bubble_bug();
 // Test 1
 void test1_bubble();
 void test1_bubble_bug();
+void test1_bubble_comb();
 
 // Test 2
 void test2_bubble();
 void test2_bubble_bug();
+void test2_bubble_comb();
 
 // Test 3
 void test3_bubble();
 void test3_bubble_bug();
+void test3_bubble_comb();
 
 
 int main() {
 	test1_bubble();
 	test1_bubble_bug();
+	test1_bubble_comb();
 	std::cout << std::endl;
 
 	test2_bubble();
 	test2_bubble_bug();
+	test2_bubble_comb();
 	std::cout << std::endl;
 
 	test3_bubble();
 	test3_bubble_bug();
+	test3_bubble_comb();
 	std::cout << std::endl;
 }
 
@@ -114,6 +121,20 @@ void test1_bubble_bug() {
 		<< std::endl;
 }
 
+void test1_bubble_comb() {
+	const size_t length = 8;
+	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+
+	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
+
+	bubble_comb_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test1.bubble_comb.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 2
 */
@@ -145,6 +166,20 @@ void test2_bubble_bug() {
 		<< std::endl;
 }
 
+void test2_bubble_comb() {
+	const size_t length = 8;
+	std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	bubble_comb_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test2.bubble_comb.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 3
 */
@@ -172,6 +207,20 @@ void test3_bubble_bug() {
 
 	std::cout
 		<< "Test3.bubble_bug.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test3_bubble_comb() {
+	const size_t length = 8;
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	bubble_comb_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test3.bubble_comb.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
