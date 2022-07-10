@@ -52,6 +52,11 @@ void test3_bubble();
 void test3_bubble_bug();
 void test3_bubble_comb();
 
+// Test 4
+void test4_bubble();
+void test4_bubble_bug();
+void test4_bubble_comb();
+
 
 int main() {
 	test1_bubble();
@@ -67,6 +72,11 @@ int main() {
 	test3_bubble();
 	test3_bubble_bug();
 	test3_bubble_comb();
+	std::cout << std::endl;
+
+	test4_bubble();
+	test4_bubble_bug();
+	test4_bubble_comb();
 	std::cout << std::endl;
 }
 
@@ -221,6 +231,51 @@ void test3_bubble_comb() {
 
 	std::cout
 		<< "Test3.bubble_comb.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+/*
+	Test 4
+*/
+void test4_bubble() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	bubble_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test4.bubble.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_bubble_bug() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	bubble_bug_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test4.bubble_bug.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_bubble_comb() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	bubble_comb_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test4.bubble_comb.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
