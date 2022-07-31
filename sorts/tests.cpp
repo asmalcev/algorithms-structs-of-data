@@ -1,5 +1,6 @@
 #include <iostream>
 #include <array>
+#include <chrono>
 
 #include "util.hpp"
 
@@ -15,6 +16,18 @@
 #include "bubble_bug.hpp"
 #include "bubble_comb.hpp"
 #include "shaker.hpp"
+#include "oddeven.hpp"
+
+
+#define mesure_time(x) {                            \
+	using std::chrono::high_resolution_clock;         \
+	using std::chrono::duration;                      \
+	auto t1 = high_resolution_clock::now();           \
+	x;                                                \
+	auto t2 = high_resolution_clock::now();           \
+	duration<double, std::milli> ms_double = t2 - t1; \
+	std::cout << ms_double.count() << "ms\n";         \
+}
 
 
 
@@ -25,24 +38,28 @@ void test1_bubble();
 void test1_bubble_bug();
 void test1_bubble_comb();
 void test1_shaker();
+void test1_oddeven();
 
 // Test 2
 void test2_bubble();
 void test2_bubble_bug();
 void test2_bubble_comb();
 void test2_shaker();
+void test2_oddeven();
 
 // Test 3
 void test3_bubble();
 void test3_bubble_bug();
 void test3_bubble_comb();
 void test3_shaker();
+void test3_oddeven();
 
 // Test 4
 void test4_bubble();
 void test4_bubble_bug();
 void test4_bubble_comb();
 void test4_shaker();
+void test4_oddeven();
 
 
 int main() {
@@ -50,24 +67,28 @@ int main() {
 	test1_bubble_bug();
 	test1_bubble_comb();
 	test1_shaker();
+	test1_oddeven();
 	std::cout << std::endl;
 
 	test2_bubble();
 	test2_bubble_bug();
 	test2_bubble_comb();
 	test2_shaker();
+	test2_oddeven();
 	std::cout << std::endl;
 
 	test3_bubble();
 	test3_bubble_bug();
 	test3_bubble_comb();
 	test3_shaker();
+	test3_oddeven();
 	std::cout << std::endl;
 
 	test4_bubble();
 	test4_bubble_bug();
 	test4_bubble_comb();
 	test4_shaker();
+	test4_oddeven();
 	std::cout << std::endl;
 }
 
@@ -100,7 +121,7 @@ void test1_bubble() {
 
 	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
 
-	bubble_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test1.bubble.result: "
@@ -114,7 +135,7 @@ void test1_bubble_bug() {
 
 	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
 
-	bubble_bug_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_bug_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test1.bubble_bug.result: "
@@ -128,7 +149,7 @@ void test1_bubble_comb() {
 
 	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
 
-	bubble_comb_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_comb_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test1.bubble_comb.result: "
@@ -142,10 +163,24 @@ void test1_shaker() {
 
 	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
 
-	shaker_sort<int>(a.data(), length, &compare);
+	mesure_time(shaker_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test1.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test1_oddeven() {
+	const size_t length = 8;
+	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+
+	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
+
+	mesure_time(oddeven_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test1.oddeven.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -159,7 +194,7 @@ void test2_bubble() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test2.bubble.result: "
@@ -173,7 +208,7 @@ void test2_bubble_bug() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_bug_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_bug_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test2.bubble_bug.result: "
@@ -187,7 +222,7 @@ void test2_bubble_comb() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_comb_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_comb_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test2.bubble_comb.result: "
@@ -201,10 +236,24 @@ void test2_shaker() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	shaker_sort<int>(a.data(), length, &compare);
+	mesure_time(shaker_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test2.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test2_oddeven() {
+	const size_t length = 8;
+	std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	mesure_time(oddeven_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test2.oddeven.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -218,7 +267,7 @@ void test3_bubble() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test3.bubble.result: "
@@ -232,7 +281,7 @@ void test3_bubble_bug() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_bug_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_bug_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test3.bubble_bug.result: "
@@ -246,7 +295,7 @@ void test3_bubble_comb() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	bubble_comb_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_comb_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test3.bubble_comb.result: "
@@ -260,10 +309,24 @@ void test3_shaker() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-	shaker_sort<int>(a.data(), length, &compare);
+	mesure_time(shaker_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test3.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test3_oddeven() {
+	const size_t length = 8;
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	mesure_time(oddeven_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test3.oddeven.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -277,7 +340,7 @@ void test4_bubble() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
-	bubble_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test4.bubble.result: "
@@ -291,7 +354,7 @@ void test4_bubble_bug() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
-	bubble_bug_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_bug_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test4.bubble_bug.result: "
@@ -305,7 +368,7 @@ void test4_bubble_comb() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
-	bubble_comb_sort<int>(a.data(), length, &compare);
+	mesure_time(bubble_comb_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test4.bubble_comb.result: "
@@ -319,10 +382,24 @@ void test4_shaker() {
 
 	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
-	shaker_sort<int>(a.data(), length, &compare);
+	mesure_time(shaker_sort<int>(a.data(), length, &compare));
 
 	std::cout
 		<< "Test4.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_oddeven() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	mesure_time(oddeven_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test4.oddeven.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
