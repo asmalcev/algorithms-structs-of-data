@@ -1,7 +1,7 @@
 #include <iostream>
 #include <array>
 
-#include "compare.hpp"
+#include "util.hpp"
 
 /*
 	Used to display count of replacements
@@ -14,25 +14,8 @@
 #include "bubble.hpp"
 #include "bubble_bug.hpp"
 #include "bubble_comb.hpp"
+#include "shaker.hpp"
 
-
-template <typename T>
-bool compare_arrays(const T* array1, const T* array2, size_t length) {
-	for (size_t i = 0; i < length; i++) {
-		if (array1[i] != array2[i]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-template <typename T>
-void display_array(const T* array, size_t length) {
-	for (size_t i = 0; i < length; i++) {
-		std::cout << array[i] << " ";
-	}
-	std::cout << std::endl;
-}
 
 
 void bug_test_bubble_bug();
@@ -41,42 +24,50 @@ void bug_test_bubble_bug();
 void test1_bubble();
 void test1_bubble_bug();
 void test1_bubble_comb();
+void test1_shaker();
 
 // Test 2
 void test2_bubble();
 void test2_bubble_bug();
 void test2_bubble_comb();
+void test2_shaker();
 
 // Test 3
 void test3_bubble();
 void test3_bubble_bug();
 void test3_bubble_comb();
+void test3_shaker();
 
 // Test 4
 void test4_bubble();
 void test4_bubble_bug();
 void test4_bubble_comb();
+void test4_shaker();
 
 
 int main() {
 	test1_bubble();
 	test1_bubble_bug();
 	test1_bubble_comb();
+	test1_shaker();
 	std::cout << std::endl;
 
 	test2_bubble();
 	test2_bubble_bug();
 	test2_bubble_comb();
+	test2_shaker();
 	std::cout << std::endl;
 
 	test3_bubble();
 	test3_bubble_bug();
 	test3_bubble_comb();
+	test3_shaker();
 	std::cout << std::endl;
 
 	test4_bubble();
 	test4_bubble_bug();
 	test4_bubble_comb();
+	test4_shaker();
 	std::cout << std::endl;
 }
 
@@ -145,6 +136,20 @@ void test1_bubble_comb() {
 		<< std::endl;
 }
 
+void test1_shaker() {
+	const size_t length = 8;
+	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+
+	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
+
+	shaker_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test1.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 2
 */
@@ -186,6 +191,20 @@ void test2_bubble_comb() {
 
 	std::cout
 		<< "Test2.bubble_comb.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test2_shaker() {
+	const size_t length = 8;
+	std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	shaker_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test2.shaker.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -235,6 +254,20 @@ void test3_bubble_comb() {
 		<< std::endl;
 }
 
+void test3_shaker() {
+	const size_t length = 8;
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	shaker_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test3.shaker.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 4
 */
@@ -276,6 +309,20 @@ void test4_bubble_comb() {
 
 	std::cout
 		<< "Test4.bubble_comb.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_shaker() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	shaker_sort<int>(a.data(), length, &compare);
+
+	std::cout
+		<< "Test4.shaker.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }

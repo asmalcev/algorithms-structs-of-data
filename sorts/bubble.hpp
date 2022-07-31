@@ -11,10 +11,10 @@ T* bubble_sort(T* array, size_t length, bool (*compare)(T, T)) {
 	size_t replace_stat = 0;
 	#endif
 
-	bool wasReplace = false;
+	bool was_replace = false;
 
 	for (size_t i = 0; i < length - 1; i++) {
-		wasReplace = false;
+		was_replace = false;
 
 		for (size_t j = 0; j < length - i - 1; j++) {
 
@@ -25,7 +25,7 @@ T* bubble_sort(T* array, size_t length, bool (*compare)(T, T)) {
 			if (compare(array[j], array[j + 1])) {
 				std::swap(array[j], array[j + 1]);
 
-				wasReplace = true;
+				was_replace = true;
 
 				#ifdef STAT
 				replace_stat++;
@@ -33,7 +33,7 @@ T* bubble_sort(T* array, size_t length, bool (*compare)(T, T)) {
 			}
 		}
 
-		if (!wasReplace) {
+		if (!was_replace) {
 			break;
 		}
 	}
