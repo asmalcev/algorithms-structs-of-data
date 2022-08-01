@@ -17,6 +17,7 @@
 #include "bubble_comb.hpp"
 #include "shaker.hpp"
 #include "oddeven.hpp"
+#include "heap.hpp"
 
 
 #define mesure_time(x) {                            \
@@ -39,6 +40,7 @@ void test1_bubble_bug();
 void test1_bubble_comb();
 void test1_shaker();
 void test1_oddeven();
+void test1_heap();
 
 // Test 2
 void test2_bubble();
@@ -46,6 +48,7 @@ void test2_bubble_bug();
 void test2_bubble_comb();
 void test2_shaker();
 void test2_oddeven();
+void test2_heap();
 
 // Test 3
 void test3_bubble();
@@ -53,6 +56,7 @@ void test3_bubble_bug();
 void test3_bubble_comb();
 void test3_shaker();
 void test3_oddeven();
+void test3_heap();
 
 // Test 4
 void test4_bubble();
@@ -60,6 +64,7 @@ void test4_bubble_bug();
 void test4_bubble_comb();
 void test4_shaker();
 void test4_oddeven();
+void test4_heap();
 
 
 int main() {
@@ -68,6 +73,7 @@ int main() {
 	test1_bubble_comb();
 	test1_shaker();
 	test1_oddeven();
+	test1_heap();
 	std::cout << std::endl;
 
 	test2_bubble();
@@ -75,6 +81,7 @@ int main() {
 	test2_bubble_comb();
 	test2_shaker();
 	test2_oddeven();
+	test2_heap();
 	std::cout << std::endl;
 
 	test3_bubble();
@@ -82,6 +89,7 @@ int main() {
 	test3_bubble_comb();
 	test3_shaker();
 	test3_oddeven();
+	test3_heap();
 	std::cout << std::endl;
 
 	test4_bubble();
@@ -89,6 +97,7 @@ int main() {
 	test4_bubble_comb();
 	test4_shaker();
 	test4_oddeven();
+	test4_heap();
 	std::cout << std::endl;
 }
 
@@ -185,6 +194,20 @@ void test1_oddeven() {
 		<< std::endl;
 }
 
+void test1_heap() {
+	const size_t length = 8;
+	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+
+	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
+
+	mesure_time(heap_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test1.heap.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 2
 */
@@ -254,6 +277,20 @@ void test2_oddeven() {
 
 	std::cout
 		<< "Test2.oddeven.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test2_heap() {
+	const size_t length = 8;
+	std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	mesure_time(heap_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test2.heap.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -331,6 +368,20 @@ void test3_oddeven() {
 		<< std::endl;
 }
 
+void test3_heap() {
+	const size_t length = 8;
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	mesure_time(heap_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test3.heap.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 4
 */
@@ -400,6 +451,20 @@ void test4_oddeven() {
 
 	std::cout
 		<< "Test4.oddeven.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_heap() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	mesure_time(heap_sort<int>(a.data(), length, &compare));
+
+	std::cout
+		<< "Test4.heap.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
