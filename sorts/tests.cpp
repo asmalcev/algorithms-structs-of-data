@@ -18,6 +18,7 @@
 #include "shaker.hpp"
 #include "oddeven.hpp"
 #include "heap.hpp"
+#include "merge.hpp"
 
 
 #define mesure_time(x) {                            \
@@ -41,6 +42,7 @@ void test1_bubble_comb();
 void test1_shaker();
 void test1_oddeven();
 void test1_heap();
+void test1_merge();
 
 // Test 2
 void test2_bubble();
@@ -49,6 +51,7 @@ void test2_bubble_comb();
 void test2_shaker();
 void test2_oddeven();
 void test2_heap();
+void test2_merge();
 
 // Test 3
 void test3_bubble();
@@ -57,6 +60,7 @@ void test3_bubble_comb();
 void test3_shaker();
 void test3_oddeven();
 void test3_heap();
+void test3_merge();
 
 // Test 4
 void test4_bubble();
@@ -65,6 +69,7 @@ void test4_bubble_comb();
 void test4_shaker();
 void test4_oddeven();
 void test4_heap();
+void test4_merge();
 
 
 int main() {
@@ -74,6 +79,7 @@ int main() {
 	test1_shaker();
 	test1_oddeven();
 	test1_heap();
+	test1_merge();
 	std::cout << std::endl;
 
 	test2_bubble();
@@ -82,6 +88,7 @@ int main() {
 	test2_shaker();
 	test2_oddeven();
 	test2_heap();
+	test2_merge();
 	std::cout << std::endl;
 
 	test3_bubble();
@@ -90,6 +97,7 @@ int main() {
 	test3_shaker();
 	test3_oddeven();
 	test3_heap();
+	test3_merge();
 	std::cout << std::endl;
 
 	test4_bubble();
@@ -98,6 +106,7 @@ int main() {
 	test4_shaker();
 	test4_oddeven();
 	test4_heap();
+	test4_merge();
 	std::cout << std::endl;
 }
 
@@ -208,6 +217,26 @@ void test1_heap() {
 		<< std::endl;
 }
 
+void test1_merge() {
+	const size_t length = 8;
+	std::array<int, length> a = {4, 2, 7, 3, 8, 3, 0, -5};
+
+	const int answer[] = {-5, 0, 2, 3, 3, 4, 7, 8};
+
+	size_t step_stat = 0;
+	size_t replace_stat = 0;
+
+	mesure_time(merge_sort<int>(a.data(), length, &compare, step_stat, replace_stat));
+
+	std::cout << "merge_sort.stepStat: " << step_stat << std::endl;
+	std::cout << "merge_sort.replaceCount: " << replace_stat << std::endl;
+
+	std::cout
+		<< "Test1.merge.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 2
 */
@@ -291,6 +320,26 @@ void test2_heap() {
 
 	std::cout
 		<< "Test2.heap.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test2_merge() {
+	const size_t length = 8;
+	std::array<int, length> a = {1, 2, 3, 0, 4, 5, 6, 7};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	size_t step_stat = 0;
+	size_t replace_stat = 0;
+
+	mesure_time(merge_sort<int>(a.data(), length, &compare, step_stat, replace_stat));
+
+	std::cout << "merge_sort.stepStat: " << step_stat << std::endl;
+	std::cout << "merge_sort.replaceCount: " << replace_stat << std::endl;
+
+	std::cout
+		<< "Test2.merge.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
@@ -382,6 +431,26 @@ void test3_heap() {
 		<< std::endl;
 }
 
+void test3_merge() {
+	const size_t length = 8;
+	std::array<int, length> a = {7, 6, 5, 4, 3, 2, 1, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+	size_t step_stat = 0;
+	size_t replace_stat = 0;
+
+	mesure_time(merge_sort<int>(a.data(), length, &compare, step_stat, replace_stat));
+
+	std::cout << "merge_sort.stepStat: " << step_stat << std::endl;
+	std::cout << "merge_sort.replaceCount: " << replace_stat << std::endl;
+
+	std::cout
+		<< "Test3.merge.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
 /*
 	Test 4
 */
@@ -465,6 +534,26 @@ void test4_heap() {
 
 	std::cout
 		<< "Test4.heap.result: "
+		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
+		<< std::endl;
+}
+
+void test4_merge() {
+	const size_t length = 16;
+	std::array<int, length> a = {15, 12, 14, 5, 7, 4, 2, 6, 10, 8, 13, 3, 1, 9, 11, 0};
+
+	const int answer[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+
+	size_t step_stat = 0;
+	size_t replace_stat = 0;
+
+	mesure_time(merge_sort<int>(a.data(), length, &compare, step_stat, replace_stat));
+
+	std::cout << "merge_sort.stepStat: " << step_stat << std::endl;
+	std::cout << "merge_sort.replaceCount: " << replace_stat << std::endl;
+
+	std::cout
+		<< "Test4.merge.result: "
 		<< (compare_arrays<int>(a.data(), answer, length) ? "passed" : "not passed")
 		<< std::endl;
 }
