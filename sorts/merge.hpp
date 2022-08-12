@@ -68,10 +68,8 @@ T* merge_sort(
 	size_t & replace_stat
 	#endif
 ) {
-	size_t split;
-
-	if (length > 1)  {
-		split = length / 2;
+	if (length > 1) {
+		size_t split = length / 2;
 		merge_sort<T>(array, split, compare, step_stat, replace_stat);
 		merge_sort<T>(array + split, length - split, compare, step_stat, replace_stat);
 		merge(array, split, length, compare, step_stat, replace_stat);
